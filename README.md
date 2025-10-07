@@ -1,34 +1,48 @@
 # grpc
 Repository for trying out grpc
 
-## Install Protocol Buffer Compiler Installation
+## Preparation
+### Install Protocol Buffer Compiler Installation
 ```sh
 brew install protobuf
 ```
 
-## Install `protoc-gen-go` and `protoc-gen-go-grpc` plugins
+### Install `protoc-gen-go` and `protoc-gen-go-grpc` plugins
 ```sh
 brew install protoc-gen-go protoc-gen-go-grpc
 ```
 
-## Generate Go code from the .proto
+## Build
+### Move to the below directory
 ```sh
 cd demo-grpc
+```
+
+### Generate Go code from the .proto
+```sh
 make build
 ```
 
-## Update Go module
+## Run Server
+### Set GOROOT environment variable
+```sh
+export GOROOT=/opt/homebrew/opt/go/libexec
+make run_server
+```
+
+## Run Client
+### Set GOROOT environment variable
+```sh
+export GOROOT=/opt/homebrew/opt/go/libexec
+make run_client
+```
+
+## Trouble shooting
+### Update Go module
 ```sh
 go mod tidy
 ```
 
-## Set GOROOT environment variable
-```sh
-export GOROOT=/opt/homebrew/opt/go/libexec
-```
-
-
-## Trouble shooting
 ### Check what's using gRPC port (50051)
 ```sh
 lsof -i :50051
@@ -38,3 +52,6 @@ lsof -i :50051
 ```sh
 kill {PID}
 ```
+
+## Reference
+- https://medium.com/@rashid14713524/introduction-to-grpc-using-golang-for-beginners-e37d7dbafef2
