@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package demo;
+
+option go_package = "github.com/rashidkalwar/demo-grpc/check_prime";
+
+service CheckPrime {
+  rpc IsPrime(IsPrimeRequest) returns (IsPrimeResponse){}
+}
+
+message IsPrimeRequest {
+  int64 number = 1;
+}
+
+message IsPrimeResponse {
+  string result = 1;
+}
