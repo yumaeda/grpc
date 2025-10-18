@@ -29,17 +29,16 @@ make build
 ```
 
 ## Run Server
-### Set GOROOT environment variable
 ```sh
 export GOROOT=/opt/homebrew/opt/go/libexec
+export TIDB_CONFIG_JSON='{"db.password":"{your_password}","db.host":"{your_host}","db.name":"{your_db}","db.user":"{your_user}"}'
 make run_server
 ```
 
 ## Run Client
-### Set GOROOT environment variable
 ```sh
 export GOROOT=/opt/homebrew/opt/go/libexec
-make run_client
+grpcurl -plaintext -d '{"id":1}' localhost:50051 area.AreaService/GetArea 
 ```
 
 ## Trouble shooting
@@ -60,3 +59,4 @@ kill {PID}
 
 ## Reference
 - https://medium.com/@rashid14713524/introduction-to-grpc-using-golang-for-beginners-e37d7dbafef2
+- https://qiita.com/haruotsu/items/762e7b292dddaf6250cb
