@@ -12,6 +12,11 @@ brew install protobuf
 brew install protoc-gen-go protoc-gen-go-grpc
 ```
 
+### Install `grpcurl`
+```sh
+brew install grpcurl
+```
+
 ## Build
 ### Move to the below directory
 ```sh
