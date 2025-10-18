@@ -22,7 +22,9 @@ type DatabaseConfig struct {
 func ConnectToDB() (*gorm.DB, func(), error) {
 	secretManagerJSON := os.Getenv("TIDB_CONFIG_JSON")
 	dbConfig := DatabaseConfig{}
-	json.Unmarshal([]byte(secretManagerJSON), &dbConfig)
+	if err := json.Unmarshal([]byte(secretManagerJSON), &dbConfig); err != nil {
+		return nil, nil, err
+	}
 
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:4000)/%s?tls=true&charset=utf8&parseTime=True&loc=Local",

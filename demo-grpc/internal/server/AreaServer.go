@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"errors"
 
 	area_proto "github.com/yumaeda/grpc/demo-grpc/internal/proto"
 	"github.com/yumaeda/grpc/demo-grpc/internal/service"
@@ -21,10 +20,6 @@ func (s *AreaServer) GetArea(ctx context.Context, req *area_proto.GetAreaRequest
 	area, err := s.areaService.GetArea(ctx, req.Id)
 	if err != nil {
 		return nil, err
-	}
-
-	if area == nil {
-		return nil, errors.New("area not found")
 	}
 
 	return &area_proto.GetAreaResponse{

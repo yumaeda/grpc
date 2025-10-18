@@ -23,7 +23,10 @@ func NewAreaRepository(DB *gorm.DB) AreaRepository {
 func (r *areaRepository) GetArea(ctx context.Context, id int64) (*model.Area, error) {
 	var area model.Area
 	if err := r.DB.WithContext(ctx).Where("id = ?", id).First(&area).Error; err != nil {
-		return nil, errors.New("area not found")
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.New("area not found")
+		}
+		return nil, err
 	}
 
 	return &area, nil
