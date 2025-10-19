@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package restaurant;
+
+option go_package = "internal/proto/restaurant";
+
+service RestaurantService {
+  rpc GetRestaurant(GetRestaurantRequest) returns (GetRestaurantResponse);
+}
+
+message GetRestaurantRequest {
+  string id = 1;
+}
+
+message GetRestaurantResponse {
+  Restaurant restaurant = 1;
+}
+
+message Restaurant {
+  string id = 1;
+  string url = 2;
+  string name = 3;
+  string genre = 4;
+  string tel = 5;
+  string business_day_info = 6;
+  string address = 7;
+  string latitude = 8;
+  string longitude = 9;
+  string area = 10;
+}
