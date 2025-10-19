@@ -6,7 +6,8 @@ import (
 	"net"
 
 	"github.com/yumaeda/grpc/internal/infrastructure"
-	area_proto "github.com/yumaeda/grpc/internal/proto"
+	area_pb "github.com/yumaeda/grpc/internal/proto/area"
+	restaurant_pb "github.com/yumaeda/grpc/internal/proto/restaurant"
 	"github.com/yumaeda/grpc/internal/repository"
 	"github.com/yumaeda/grpc/internal/server"
 	"github.com/yumaeda/grpc/internal/service"
@@ -21,12 +22,17 @@ func main() {
 	}
 	defer dbCloser()
 
+	grpcServer := grpc.NewServer()
+
 	areaRepository := repository.NewAreaRepository(db)
 	areaService := service.NewAreaService(areaRepository)
-
-	grpcServer := grpc.NewServer()
 	areaServer := server.NewAreaServer(areaService)
-	area_proto.RegisterAreaServiceServer(grpcServer, areaServer)
+	area_pb.RegisterAreaServiceServer(grpcServer, areaServer)
+
+	restaurantRepository := repository.NewRestaurantRepository(db)
+	restaurantService := service.NewRestaurantService(restaurantRepository)
+	restaurantServer := server.NewRestaurantServer(restaurantService)
+	restaurant_pb.RegisterRestaurantServiceServer(grpcServer, restaurantServer)
 
 	reflection.Register(grpcServer)
 
