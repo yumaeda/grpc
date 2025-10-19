@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/yumaeda/grpc/demo-grpc/internal/model"
+	"github.com/yumaeda/grpc/internal/model"
 	"gorm.io/gorm"
 )
 

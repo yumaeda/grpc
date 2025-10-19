@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	area_proto "github.com/yumaeda/grpc/demo-grpc/internal/proto"
-	"github.com/yumaeda/grpc/demo-grpc/internal/service"
+	area_proto "github.com/yumaeda/grpc/internal/proto"
+	"github.com/yumaeda/grpc/internal/service"
 )
 
 type AreaServer struct {

@@ -1,4 +1,4 @@
-module github.com/yumaeda/grpc/demo-grpc
+module github.com/yumaeda/grpc
 
 go 1.23.0
 

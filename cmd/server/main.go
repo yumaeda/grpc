@@ -5,11 +5,11 @@ import (
 	"log"
 	"net"
 
-	"github.com/yumaeda/grpc/demo-grpc/internal/infrastructure"
-	area_proto "github.com/yumaeda/grpc/demo-grpc/internal/proto"
-	"github.com/yumaeda/grpc/demo-grpc/internal/repository"
-	"github.com/yumaeda/grpc/demo-grpc/internal/server"
-	"github.com/yumaeda/grpc/demo-grpc/internal/service"
+	"github.com/yumaeda/grpc/internal/infrastructure"
+	area_proto "github.com/yumaeda/grpc/internal/proto"
+	"github.com/yumaeda/grpc/internal/repository"
+	"github.com/yumaeda/grpc/internal/server"
+	"github.com/yumaeda/grpc/internal/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
