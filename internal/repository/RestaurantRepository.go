@@ -23,9 +23,15 @@ func NewRestaurantRepository(DB *gorm.DB) RestaurantRepository {
 func (r *restaurantRepository) GetRestaurant(ctx context.Context, id string) (*model.Restaurant, error) {
 	var restaurant model.Restaurant
 	if err := r.DB.WithContext(ctx).
-		Select("BIN_TO_UUID(id, 1) as id, url, name, genre, tel, business_day_info, address, latitude, longitude, area").
-		Where("BIN_TO_UUID(id, 1) = ?", id).
-		First(&restaurant).Error; err != nil {
+		Raw(`
+			SELECT id, url, name, genre, tel, business_day_info, address, latitude, longitude, area
+			FROM (
+				SELECT BIN_TO_UUID(id, 1) as id, url, name, genre, tel, business_day_info, address, latitude, longitude, area
+				FROM restaurants
+			) AS sub
+			WHERE id = ?
+		`, id).
+		Scan(&restaurant).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errors.New("restaurant not found")
 		}
