@@ -18,11 +18,6 @@ brew install grpcurl
 ```
 
 ## Build
-### Move to the below directory
-```sh
-cd demo-grpc
-```
-
 ### Generate Go code from the .proto
 ```sh
 make build

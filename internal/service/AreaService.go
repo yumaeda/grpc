@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/yumaeda/grpc/demo-grpc/internal/model"
-	"github.com/yumaeda/grpc/demo-grpc/internal/repository"
+	"github.com/yumaeda/grpc/internal/model"
+	"github.com/yumaeda/grpc/internal/repository"
 )
 
 type AreaService interface {
