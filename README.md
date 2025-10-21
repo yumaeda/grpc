@@ -30,12 +30,15 @@ export TIDB_CONFIG_JSON='{"db.password":"{your_password}","db.host":"{your_host}
 make run_server
 ```
 
-## Run Client
+## Run Tests
+### Make sure the gRPC server is running
 ```sh
-export GOROOT=/opt/homebrew/opt/go/libexec
-grpcurl -plaintext -d '{"id":1}' localhost:50051 area.AreaService/GetArea 
-grpcurl -plaintext -d '{"id":"0b95fe0d-a323-43d7-954b-2164a1d3242d"}' localhost:50051 restaurant.RestaurantService/GetRestaurant
-grpcurl -plaintext -d '{"id":"116e70bb-c26c-4ec7-8935-7f922e8bf551"}' localhost:50051 menu.MenuService/GetMenu
+make run_server
+```
+
+### In another terminal, run the tests
+```sh
+./test_grpc.sh
 ```
 
 ## Trouble shooting

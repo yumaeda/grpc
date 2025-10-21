@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package photo;
+
+option go_package = "internal/proto/photo";
+
+service PhotoService {
+  rpc GetPhoto(GetPhotoRequest) returns (GetPhotoResponse);
+}
+
+message GetPhotoRequest {
+  int64 id = 1;
+}
+
+message GetPhotoResponse {
+  Photo photo = 1;
+}
+
+message Photo {
+  int64 id = 1;
+  string restaurant_id = 2;
+  string name = 3;
+  string image = 4;
+  string image_webp = 5;
+  string thumbnail = 6;
+  string thumbnail_webp = 7;
+}

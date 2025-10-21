@@ -3,7 +3,7 @@ build:
 	--go_out=. \
 	--go_opt=paths=source_relative \
 	--go-grpc_out=. \
-	--go-grpc_opt=paths=source_relative internal/proto/area/area.proto internal/proto/restaurant/restaurant.proto internal/proto/menu/menu.proto
+	--go-grpc_opt=paths=source_relative internal/proto/area/area.proto internal/proto/restaurant/restaurant.proto internal/proto/menu/menu.proto internal/proto/photo/photo.proto
 
 run_server:
 	go run cmd/server/main.go
