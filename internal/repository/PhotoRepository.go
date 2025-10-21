@@ -30,8 +30,8 @@ func (r *photoRepository) GetPhoto(ctx context.Context, id int64) (*model.Photo,
 				name,
 				CONCAT(name, '.jpg') AS image,
 				CONCAT(name, '.webp') AS image_webp,
-                CONCAT(name, '_thumbnail.jpg') AS thumbnail,
-                CONCAT(name, '_thumbnail.webp') AS thumbnail_webp
+				CONCAT(name, '_thumbnail.jpg') AS thumbnail,
+				CONCAT(name, '_thumbnail.webp') AS thumbnail_webp
 			FROM photos
 			WHERE id = ?
 		`, id).
