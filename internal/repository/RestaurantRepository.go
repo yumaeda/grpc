@@ -24,12 +24,19 @@ func (r *restaurantRepository) GetRestaurant(ctx context.Context, id string) (*m
 	var restaurant model.Restaurant
 	if err := r.DB.WithContext(ctx).
 		Raw(`
-			SELECT id, url, name, genre, tel, business_day_info, address, latitude, longitude, area
-			FROM (
-				SELECT BIN_TO_UUID(id, 1) as id, url, name, genre, tel, business_day_info, address, latitude, longitude, area
-				FROM restaurants
-			) AS sub
-			WHERE id = ?
+			SELECT 
+				BIN_TO_UUID(id, 1) as id,
+				url,
+				name,
+				genre,
+				tel,
+				business_day_info,
+				address,
+				latitude,
+				longitude,
+				area
+			FROM restaurants
+			WHERE BIN_TO_UUID(id, 1) = ?
 		`, id).
 		Scan(&restaurant).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
