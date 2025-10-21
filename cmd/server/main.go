@@ -8,6 +8,7 @@ import (
 	"github.com/yumaeda/grpc/internal/infrastructure"
 	area_pb "github.com/yumaeda/grpc/internal/proto/area"
 	menu_pb "github.com/yumaeda/grpc/internal/proto/menu"
+	photo_pb "github.com/yumaeda/grpc/internal/proto/photo"
 	restaurant_pb "github.com/yumaeda/grpc/internal/proto/restaurant"
 	"github.com/yumaeda/grpc/internal/repository"
 	"github.com/yumaeda/grpc/internal/server"
@@ -58,4 +59,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	menuService := service.NewMenuService(menuRepository)
 	menuServer := server.NewMenuServer(menuService)
 	menu_pb.RegisterMenuServiceServer(grpcServer, menuServer)
+
+	// Photo service
+	photoRepository := repository.NewPhotoRepository(db)
+	photoService := service.NewPhotoService(photoRepository)
+	photoServer := server.NewPhotoServer(photoService)
+	photo_pb.RegisterPhotoServiceServer(grpcServer, photoServer)
 }
