@@ -24,9 +24,8 @@ func (s *AdminUserServer) GetAdminUser(ctx context.Context, req *pb.GetAdminUser
 
 	return &pb.GetAdminUserResponse{
 		AdminUser: &pb.AdminUser{
-			Id:       adminUser.ID,
-			Email:    adminUser.Email,
-			Password: adminUser.Password,
+			Id:    adminUser.ID,
+			Email: adminUser.Email,
 		},
 	}, nil
 }

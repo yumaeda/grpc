@@ -19,6 +19,4 @@ message GetAdminUserResponse {
 message AdminUser {
   string id = 1;
   string email = 2;
-  string password = 3;
 }
-

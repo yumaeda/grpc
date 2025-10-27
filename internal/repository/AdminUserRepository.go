@@ -26,8 +26,7 @@ func (r *adminUserRepository) GetAdminUser(ctx context.Context, id string) (*mod
 		Raw(`
 			SELECT 
 				BIN_TO_UUID(id, 1) as id,
-				email,
-				password
+				email
 			FROM admin_users
 			WHERE BIN_TO_UUID(id, 1) = ?
 		`, id).
