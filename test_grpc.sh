@@ -32,5 +32,11 @@ echo "Request: {\"id\":\"116e70bb-c26c-4ec7-8935-7f922e8bf551\"}"
 grpcurl -plaintext -d '{"id":"116e70bb-c26c-4ec7-8935-7f922e8bf551"}' localhost:50051 menu.MenuService/GetMenu
 echo -e "\n"
 
+# Test Video Service
+echo -e "${GREEN}Testing VideoService...${NC}"
+echo "Request: {\"id\":1}"
+grpcurl -plaintext -d '{"id":1}' localhost:50051 video.VideoService/GetVideo
+echo -e "\n"
+
 echo -e "${BLUE}=== All tests completed ===${NC}"
 

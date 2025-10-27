@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package video;
+
+option go_package = "internal/proto/video";
+
+service VideoService {
+  rpc GetVideo(GetVideoRequest) returns (GetVideoResponse);
+}
+
+message GetVideoRequest {
+  int64 id = 1;
+}
+
+message GetVideoResponse {
+  Video video = 1;
+}
+
+message Video {
+  int64 id = 1;
+  string restaurant_id = 2;
+  string name = 3;
+  string url = 4;
+}
+
