@@ -44,5 +44,11 @@ echo "Request: {\"id\":\"5a5911ef-e1f9-ea31-a2da-12811e5e843c\"}"
 grpcurl -plaintext -d '{"id":"5a5911ef-e1f9-ea31-a2da-12811e5e843c"}' localhost:50051 admin_user.AdminUserService/GetAdminUser
 echo -e "\n"
 
+# Test Category Service
+echo -e "${GREEN}Testing CategoryService...${NC}"
+echo "Request: {\"id\":1}"
+grpcurl -plaintext -d '{"id":1}' localhost:50051 category.CategoryService/GetCategory
+echo -e "\n"
+
 echo -e "${BLUE}=== All tests completed ===${NC}"
 

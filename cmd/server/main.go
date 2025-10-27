@@ -8,6 +8,7 @@ import (
 	"github.com/yumaeda/grpc/internal/infrastructure"
 	admin_user_pb "github.com/yumaeda/grpc/internal/proto/admin_user"
 	area_pb "github.com/yumaeda/grpc/internal/proto/area"
+	category_pb "github.com/yumaeda/grpc/internal/proto/category"
 	menu_pb "github.com/yumaeda/grpc/internal/proto/menu"
 	photo_pb "github.com/yumaeda/grpc/internal/proto/photo"
 	restaurant_pb "github.com/yumaeda/grpc/internal/proto/restaurant"
@@ -79,4 +80,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	adminUserService := service.NewAdminUserService(adminUserRepository)
 	adminUserServer := server.NewAdminUserServer(adminUserService)
 	admin_user_pb.RegisterAdminUserServiceServer(grpcServer, adminUserServer)
+
+	// Category service
+	categoryRepository := repository.NewCategoryRepository(db)
+	categoryService := service.NewCategoryService(categoryRepository)
+	categoryServer := server.NewCategoryServer(categoryService)
+	category_pb.RegisterCategoryServiceServer(grpcServer, categoryServer)
 }
