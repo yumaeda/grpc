@@ -6,6 +6,7 @@ import (
 	"net"
 
 	"github.com/yumaeda/grpc/internal/infrastructure"
+	admin_user_pb "github.com/yumaeda/grpc/internal/proto/admin_user"
 	area_pb "github.com/yumaeda/grpc/internal/proto/area"
 	menu_pb "github.com/yumaeda/grpc/internal/proto/menu"
 	photo_pb "github.com/yumaeda/grpc/internal/proto/photo"
@@ -72,4 +73,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	videoService := service.NewVideoService(videoRepository)
 	videoServer := server.NewVideoServer(videoService)
 	video_pb.RegisterVideoServiceServer(grpcServer, videoServer)
+
+	// AdminUser service
+	adminUserRepository := repository.NewAdminUserRepository(db)
+	adminUserService := service.NewAdminUserService(adminUserRepository)
+	adminUserServer := server.NewAdminUserServer(adminUserService)
+	admin_user_pb.RegisterAdminUserServiceServer(grpcServer, adminUserServer)
 }

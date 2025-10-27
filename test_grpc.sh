@@ -38,5 +38,11 @@ echo "Request: {\"id\":1}"
 grpcurl -plaintext -d '{"id":1}' localhost:50051 video.VideoService/GetVideo
 echo -e "\n"
 
+# Test AdminUser Service
+echo -e "${GREEN}Testing AdminUserService...${NC}"
+echo "Request: {\"id\":\"5a5911ef-e1f9-ea31-a2da-12811e5e843c\"}"
+grpcurl -plaintext -d '{"id":"5a5911ef-e1f9-ea31-a2da-12811e5e843c"}' localhost:50051 admin_user.AdminUserService/GetAdminUser
+echo -e "\n"
+
 echo -e "${BLUE}=== All tests completed ===${NC}"
 

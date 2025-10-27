@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package admin_user;
+
+option go_package = "internal/proto/admin_user";
+
+service AdminUserService {
+  rpc GetAdminUser(GetAdminUserRequest) returns (GetAdminUserResponse);
+}
+
+message GetAdminUserRequest {
+  string id = 1;
+}
+
+message GetAdminUserResponse {
+  AdminUser admin_user = 1;
+}
+
+message AdminUser {
+  string id = 1;
+  string email = 2;
+  string password = 3;
+}
+
