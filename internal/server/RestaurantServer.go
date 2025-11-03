@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	pb "github.com/yumaeda/grpc/internal/proto/restaurant"
 	"github.com/yumaeda/grpc/internal/service"
+	pb "github.com/yumaeda/grpc/swapi/restaurant/restaurant"
 )
 
 type RestaurantServer struct {

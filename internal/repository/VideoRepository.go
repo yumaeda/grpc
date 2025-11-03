@@ -10,6 +10,7 @@ import (
 
 type VideoRepository interface {
 	GetVideo(ctx context.Context, id int64) (*model.Video, error)
+	ListVideos(ctx context.Context, restaurantId string) ([]*model.Video, error)
 }
 
 type videoRepository struct {
@@ -40,4 +41,25 @@ func (r *videoRepository) GetVideo(ctx context.Context, id int64) (*model.Video,
 	}
 
 	return &video, nil
+}
+
+func (r *videoRepository) ListVideos(ctx context.Context, restaurantId string) ([]*model.Video, error) {
+	var videos []*model.Video
+	if err := r.DB.WithContext(ctx).
+		Raw(`
+			SELECT 
+				id,
+				BIN_TO_UUID(restaurant_id, 1) as restaurant_id,
+				name,
+				url
+			FROM videos
+			WHERE BIN_TO_UUID(restaurant_id, 1) = ?
+		`, restaurantId).Scan(&videos).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.New("videos for the restaurant not found")
+		}
+		return nil, err
+	}
+
+	return videos, nil
 }

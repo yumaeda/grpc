@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package admin_user;
 
-option go_package = "internal/proto/admin_user";
+option go_package = "proto/admin_user";
 
 service AdminUserService {
   rpc GetAdminUser(GetAdminUserRequest) returns (GetAdminUserResponse);

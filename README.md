@@ -17,6 +17,11 @@ brew install protoc-gen-go protoc-gen-go-grpc
 brew install grpcurl
 ```
 
+### Install `protoc-gen-grpc-federation`
+```sh
+go install github.com/mercari/grpc-federation/cmd/protoc-gen-grpc-federation@latest
+```
+
 ## Build
 ### Generate Go code from the .proto
 ```sh
@@ -31,14 +36,30 @@ make run_server
 ```
 
 ## Run Tests
-### Make sure the gRPC server is running
-```sh
-make run_server
-```
-
 ### In another terminal, run the tests
 ```sh
 ./test_grpc.sh
+```
+
+## gRPC Federation
+### Build
+#### Generate Go code from the .proto
+```sh
+make build_federation
+```
+
+### Run
+#### Run all the gRPC servers
+```sh
+export GOROOT=/opt/homebrew/opt/go/libexec
+export TIDB_CONFIG_JSON='{"db.password":"{your_password}","db.host":"{your_host}","db.name":"{your_db}","db.user":"{your_user}"}'
+make run_all_servers
+```
+
+### Run tests
+### In another terminal, run the tests
+```sh
+./test_grpc_federation.sh
 ```
 
 ## Trouble shooting
@@ -47,9 +68,12 @@ make run_server
 go mod tidy
 ```
 
-### Check what's using gRPC port (50051)
+### Check what's using gRPC ports
 ```sh
-lsof -i :50051
+lsof -i :50050  # BFF server
+lsof -i :50051  # restaurant server
+lsof -i :50052  # video server
+lsof -i :50053  # swapi server
 ```
 
 ### Kill the specified process by PID

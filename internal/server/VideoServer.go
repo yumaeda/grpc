@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	pb "github.com/yumaeda/grpc/internal/proto/video"
 	"github.com/yumaeda/grpc/internal/service"
+	pb "github.com/yumaeda/grpc/swapi/video/video"
 )
 
 type VideoServer struct {
@@ -29,5 +29,26 @@ func (s *VideoServer) GetVideo(ctx context.Context, req *pb.GetVideoRequest) (*p
 			Name:         video.Name,
 			Url:          video.URL,
 		},
+	}, nil
+}
+
+func (s *VideoServer) ListVideos(ctx context.Context, req *pb.ListVideosRequest) (*pb.ListVideosResponse, error) {
+	videos, err := s.videoService.ListVideos(ctx, req.RestaurantId)
+	if err != nil {
+		return nil, err
+	}
+
+	pbVideos := make([]*pb.Video, len(videos))
+	for i, video := range videos {
+		pbVideos[i] = &pb.Video{
+			Id:           video.ID,
+			RestaurantId: video.RestaurantID,
+			Name:         video.Name,
+			Url:          video.URL,
+		}
+	}
+
+	return &pb.ListVideosResponse{
+		Videos: pbVideos,
 	}, nil
 }

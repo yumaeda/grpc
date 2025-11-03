@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	pb "github.com/yumaeda/grpc/internal/proto/category"
 	"github.com/yumaeda/grpc/internal/service"
+	pb "github.com/yumaeda/grpc/proto/category"
 )
 
 type CategoryServer struct {

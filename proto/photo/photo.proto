@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package photo;
 
-option go_package = "internal/proto/photo";
+option go_package = "proto/photo";
 
 service PhotoService {
   rpc GetPhoto(GetPhotoRequest) returns (GetPhotoResponse);

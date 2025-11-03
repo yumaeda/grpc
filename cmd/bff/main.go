@@ -6,16 +6,14 @@ import (
 	"net"
 
 	"github.com/yumaeda/grpc/internal/infrastructure"
-	admin_user_pb "github.com/yumaeda/grpc/internal/proto/admin_user"
-	area_pb "github.com/yumaeda/grpc/internal/proto/area"
-	category_pb "github.com/yumaeda/grpc/internal/proto/category"
-	menu_pb "github.com/yumaeda/grpc/internal/proto/menu"
-	photo_pb "github.com/yumaeda/grpc/internal/proto/photo"
-	restaurant_pb "github.com/yumaeda/grpc/internal/proto/restaurant"
-	video_pb "github.com/yumaeda/grpc/internal/proto/video"
 	"github.com/yumaeda/grpc/internal/repository"
 	"github.com/yumaeda/grpc/internal/server"
 	"github.com/yumaeda/grpc/internal/service"
+	admin_user_pb "github.com/yumaeda/grpc/proto/admin_user"
+	area_pb "github.com/yumaeda/grpc/proto/area"
+	category_pb "github.com/yumaeda/grpc/proto/category"
+	menu_pb "github.com/yumaeda/grpc/proto/menu"
+	photo_pb "github.com/yumaeda/grpc/proto/photo"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"gorm.io/gorm"
@@ -32,13 +30,13 @@ func main() {
 	registerServices(grpcServer, db)
 	reflection.Register(grpcServer)
 
-	listener, err := net.Listen("tcp", ":50051")
+	listener, err := net.Listen("tcp", ":50050")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 	defer listener.Close()
 
-	fmt.Println("gRPC server listening on :50051")
+	fmt.Println("gRPC server listening on :50050")
 	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
@@ -51,12 +49,6 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	areaServer := server.NewAreaServer(areaService)
 	area_pb.RegisterAreaServiceServer(grpcServer, areaServer)
 
-	// Restaurant service
-	restaurantRepository := repository.NewRestaurantRepository(db)
-	restaurantService := service.NewRestaurantService(restaurantRepository)
-	restaurantServer := server.NewRestaurantServer(restaurantService)
-	restaurant_pb.RegisterRestaurantServiceServer(grpcServer, restaurantServer)
-
 	// Menu service
 	menuRepository := repository.NewMenuRepository(db)
 	menuService := service.NewMenuService(menuRepository)
@@ -68,12 +60,6 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	photoService := service.NewPhotoService(photoRepository)
 	photoServer := server.NewPhotoServer(photoService)
 	photo_pb.RegisterPhotoServiceServer(grpcServer, photoServer)
-
-	// Video service
-	videoRepository := repository.NewVideoRepository(db)
-	videoService := service.NewVideoService(videoRepository)
-	videoServer := server.NewVideoServer(videoService)
-	video_pb.RegisterVideoServiceServer(grpcServer, videoServer)
 
 	// AdminUser service
 	adminUserRepository := repository.NewAdminUserRepository(db)
