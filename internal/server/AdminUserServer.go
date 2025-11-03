@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	pb "github.com/yumaeda/grpc/internal/proto/admin_user"
 	"github.com/yumaeda/grpc/internal/service"
+	pb "github.com/yumaeda/grpc/proto/admin_user"
 )
 
 type AdminUserServer struct {

@@ -1,11 +1,12 @@
 syntax = "proto3";
 
-package video;
+package swapi.video;
 
-option go_package = "internal/proto/video";
+option go_package = "github.com/yumaeda/grpc/swapi/video/video;videopb";
 
 service VideoService {
   rpc GetVideo(GetVideoRequest) returns (GetVideoResponse);
+  rpc ListVideos(ListVideosRequest) returns (ListVideosResponse);
 }
 
 message GetVideoRequest {
@@ -16,10 +17,17 @@ message GetVideoResponse {
   Video video = 1;
 }
 
+message ListVideosRequest {
+  string restaurant_id = 1;
+}
+
+message ListVideosResponse {
+  repeated Video videos = 1;
+}
+
 message Video {
   int64 id = 1;
   string restaurant_id = 2;
   string name = 3;
   string url = 4;
 }
-

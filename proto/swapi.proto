@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+import "grpc/federation/federation.proto";
+
+import "restaurant/restaurant.proto";
+import "video/video.proto";
+
+package swapi;
+
+option go_package = "github.com/yumaeda/grpc/swapi/swapi;swapipb";
+
+service SWAPI {
+  option (grpc.federation.service) = {};
+
+  rpc GetRestaurant(GetRestaurantRequest) returns (GetRestaurantReply);
+}
+
+message GetRestaurantRequest {
+  // id for the restaurant you want to get
+  string id = 1;
+}
+
+message GetRestaurantReply {
+  option (grpc.federation.message) = {
+    def {
+      name: "res"
+      call {
+        method: "swapi.restaurant.RestaurantService/GetRestaurant"
+        request { field: "id" by: "$.id" }
+      }
+    }
+    def { name: "r" by: "res.restaurant" }
+    def {
+      name: "videos"
+      call {
+        method: "swapi.video.VideoService/ListVideos"
+        request { field: "restaurant_id" by: "$.id" }
+      }
+    }
+  };
+
+  Restaurant restaurant = 1 [(grpc.federation.field).by = "r"];
+  repeated Video videos = 2 [(grpc.federation.field).by = "videos.videos"];
+}
+
+message Restaurant {
+  option (grpc.federation.message).alias = "swapi.restaurant.Restaurant";
+
+  string id = 1;
+  string url = 2;
+  string name = 3;
+  string genre = 4;
+  string tel = 5;
+  string business_day_info = 6;
+  string address = 7;
+  string latitude = 8;
+  string longitude = 9;
+  string area = 10;
+}
+
+message Video {
+  option (grpc.federation.message).alias = "swapi.video.Video";
+
+  int64 id = 1;
+  string restaurant_id = 2;
+  string name = 3;
+  string url = 4;
+}

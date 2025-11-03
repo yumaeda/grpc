@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package category;
 
-option go_package = "internal/proto/category";
+option go_package = "proto/category";
 
 service CategoryService {
   rpc GetCategory(GetCategoryRequest) returns (GetCategoryResponse);

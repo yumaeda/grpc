@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package menu;
 
-option go_package = "internal/proto/menu";
+option go_package = "proto/menu";
 
 service MenuService {
   rpc GetMenu(GetMenuRequest) returns (GetMenuResponse);
