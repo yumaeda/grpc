@@ -12,6 +12,7 @@ import (
 	admin_user_pb "github.com/yumaeda/sakabas-grpc/proto/admin_user"
 	area_pb "github.com/yumaeda/sakabas-grpc/proto/area"
 	category_pb "github.com/yumaeda/sakabas-grpc/proto/category"
+	genre_pb "github.com/yumaeda/sakabas-grpc/proto/genre"
 	menu_pb "github.com/yumaeda/sakabas-grpc/proto/menu"
 	photo_pb "github.com/yumaeda/sakabas-grpc/proto/photo"
 	ranking_pb "github.com/yumaeda/sakabas-grpc/proto/ranking"
@@ -79,4 +80,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	rankingService := service.NewRankingService(rankingRepository)
 	rankingServer := server.NewRankingServer(rankingService)
 	ranking_pb.RegisterRankingServiceServer(grpcServer, rankingServer)
+
+	// Genre service
+	genreRepository := repository.NewGenreRepository(db)
+	genreService := service.NewGenreService(genreRepository)
+	genreServer := server.NewGenreServer(genreService)
+	genre_pb.RegisterGenreServiceServer(grpcServer, genreServer)
 }

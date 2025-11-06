@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package area;
 
-option go_package = "internal/proto/area";
+option go_package = "proto/area";
 
 service AreaService {
   rpc GetArea(GetAreaRequest) returns (GetAreaResponse);

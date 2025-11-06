@@ -9,7 +9,8 @@ build:
 	proto/category/category.proto \
 	proto/menu/menu.proto \
 	proto/photo/photo.proto \
-	proto/ranking/ranking.proto
+	proto/ranking/ranking.proto \
+	proto/genre/genre.proto
 
 PROTOC := PATH=$$PATH:$$(go env GOPATH)/bin protoc
 PROTO_PATH := ./proto
