@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 
-	restaurantpb "github.com/yumaeda/grpc/swapi/restaurant/restaurant"
-	swapipb "github.com/yumaeda/grpc/swapi/swapi"
-	videopb "github.com/yumaeda/grpc/swapi/video/video"
+	restaurantpb "github.com/yumaeda/sakabas-grpc/swapi/restaurant/restaurant"
+	swapipb "github.com/yumaeda/sakabas-grpc/swapi/swapi"
+	videopb "github.com/yumaeda/sakabas-grpc/swapi/video/video"
 )
 
 func main() {

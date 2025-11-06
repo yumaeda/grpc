@@ -30,7 +30,6 @@ make build
 
 ## Run Server
 ```sh
-export GOROOT=/opt/homebrew/opt/go/libexec
 export TIDB_CONFIG_JSON='{"db.password":"{your_password}","db.host":"{your_host}","db.name":"{your_db}","db.user":"{your_user}"}'
 make run_server
 ```
@@ -51,7 +50,6 @@ make build_federation
 ### Run
 #### Run all the gRPC servers
 ```sh
-export GOROOT=/opt/homebrew/opt/go/libexec
 export TIDB_CONFIG_JSON='{"db.password":"{your_password}","db.host":"{your_host}","db.name":"{your_db}","db.user":"{your_user}"}'
 make run_all_servers
 ```
@@ -63,6 +61,11 @@ make run_all_servers
 ```
 
 ## Trouble shooting
+### Clear Go cache
+```sh
+go clean -modcache
+```
+
 ### Update Go module
 ```sh
 go mod tidy

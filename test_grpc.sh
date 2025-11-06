@@ -38,4 +38,10 @@ echo "Request: {\"id\":1}"
 grpcurl -plaintext -d '{"id":1}' localhost:50050 category.CategoryService/GetCategory
 echo -e "\n"
 
+# Test Ranking Service - GetRanking
+echo -e "${GREEN}Testing RankingService - GetRanking...${NC}"
+echo "Request: {\"id\":1}"
+grpcurl -plaintext -d '{"id":1}' localhost:50050 ranking.RankingService/GetRanking
+echo -e "\n"
+
 echo -e "${BLUE}=== All tests completed ===${NC}"

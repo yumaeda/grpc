@@ -7,12 +7,12 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/yumaeda/grpc/internal/infrastructure"
-	"github.com/yumaeda/grpc/internal/repository"
-	"github.com/yumaeda/grpc/internal/server"
-	"github.com/yumaeda/grpc/internal/service"
+	"github.com/yumaeda/sakabas-grpc/internal/infrastructure"
+	"github.com/yumaeda/sakabas-grpc/internal/repository"
+	"github.com/yumaeda/sakabas-grpc/internal/server"
+	"github.com/yumaeda/sakabas-grpc/internal/service"
 
-	pb "github.com/yumaeda/grpc/swapi/video/video"
+	pb "github.com/yumaeda/sakabas-grpc/swapi/video/video"
 )
 
 func main() {
