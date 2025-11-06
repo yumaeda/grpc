@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package genre;
+
+option go_package = "proto/genre";
+
+service GenreService {
+  rpc GetGenre(GetGenreRequest) returns (GetGenreResponse);
+}
+
+message GetGenreRequest {
+  int64 id = 1;
+}
+
+message GetGenreResponse {
+  Genre genre = 1;
+}
+
+message Genre {
+  int64 id = 1;
+  string name = 2;
+}
