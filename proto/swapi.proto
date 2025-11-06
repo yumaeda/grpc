@@ -7,7 +7,7 @@ import "video/video.proto";
 
 package swapi;
 
-option go_package = "github.com/yumaeda/grpc/swapi/swapi;swapipb";
+option go_package = "github.com/yumaeda/sakabas-grpc/swapi/swapi;swapipb";
 
 service SWAPI {
   option (grpc.federation.service) = {};

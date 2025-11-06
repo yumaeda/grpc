@@ -3,12 +3,18 @@ build:
 	--go_out=. \
 	--go_opt=paths=source_relative \
 	--go-grpc_out=. \
-	--go-grpc_opt=paths=source_relative proto/admin_user/admin_user.proto proto/area/area.proto proto/category/category.proto proto/menu/menu.proto proto/photo/photo.proto
+	--go-grpc_opt=paths=source_relative \
+	proto/admin_user/admin_user.proto \
+	proto/area/area.proto \
+	proto/category/category.proto \
+	proto/menu/menu.proto \
+	proto/photo/photo.proto \
+	proto/ranking/ranking.proto
 
 PROTOC := PATH=$$PATH:$$(go env GOPATH)/bin protoc
 PROTO_PATH := ./proto
 GRPC_FED_PROTO_PATH := $$(go list -m -f '{{.Dir}}' github.com/mercari/grpc-federation)/proto
-GOOGLEAPIS_PROTO_PATH := $$(find $$(go env GOPATH)/pkg/mod/github.com/googleapis -name "googleapis@*" -type d 2>/dev/null | head -1)
+GOOGLEAPIS_PROTO_PATH := $$(go list -m -f '{{.Dir}}' github.com/mercari/grpc-federation)/proto_deps
 GO_OPTS := --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative
 
 build_federation:
@@ -32,30 +38,30 @@ build_federation:
 	@mv swapi/*.pb.go swapi/swapi/
 
 run_server:
-	go run cmd/bff/main.go
+	@GOROOT="" go run cmd/bff/main.go
 
 run_restaurant_server:
 	@echo "Starting restaurant server on port 50051..."
-	@go run cmd/restaurant/main.go &
+	@GOROOT="" go run cmd/restaurant/main.go &
 
 run_video_server:
 	@echo "Starting video server on port 50052..."
-	@go run cmd/video/main.go &
+	@GOROOT="" go run cmd/video/main.go &
 
 run_swapi_server:
 	@echo "Starting federation server on port 50053..."
 	@RESTAURANT_SERVICE_ENDPOINT=localhost:50051 \
 	VIDEO_SERVICE_ENDPOINT=localhost:50052 \
-	go run cmd/swapi/main.go &
+	GOROOT="" go run cmd/swapi/main.go &
 
 run_all_servers:
 	@echo "Starting all servers..."
-	@go run cmd/restaurant/main.go &
-	@go run cmd/video/main.go &
+	@GOROOT="" go run cmd/restaurant/main.go &
+	@GOROOT="" go run cmd/video/main.go &
 	@sleep 2  # Wait for backend servers to start
 	@RESTAURANT_SERVICE_ENDPOINT=localhost:50051 \
 	VIDEO_SERVICE_ENDPOINT=localhost:50052 \
-	go run cmd/swapi/main.go &
+	GOROOT="" go run cmd/swapi/main.go &
 	@echo "All servers started in background"
 
 stop_servers:

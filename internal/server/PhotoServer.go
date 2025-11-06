@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 
-	"github.com/yumaeda/grpc/internal/service"
-	pb "github.com/yumaeda/grpc/proto/photo"
+	"github.com/yumaeda/sakabas-grpc/internal/service"
+	pb "github.com/yumaeda/sakabas-grpc/proto/photo"
 )
 
 type PhotoServer struct {

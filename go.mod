@@ -1,4 +1,4 @@
-module github.com/yumaeda/grpc
+module github.com/yumaeda/sakabas-grpc
 
 go 1.24.0
 

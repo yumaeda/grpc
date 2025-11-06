@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package swapi.restaurant;
 
-option go_package = "github.com/yumaeda/grpc/swapi/restaurant/restaurant;restaurantpb";
+option go_package = "github.com/yumaeda/sakabas-grpc/swapi/restaurant/restaurant;restaurantpb";
 
 service RestaurantService {
   rpc GetRestaurant(GetRestaurantRequest) returns (GetRestaurantResponse);

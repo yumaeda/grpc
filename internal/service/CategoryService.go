@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/yumaeda/grpc/internal/model"
-	"github.com/yumaeda/grpc/internal/repository"
+	"github.com/yumaeda/sakabas-grpc/internal/model"
+	"github.com/yumaeda/sakabas-grpc/internal/repository"
 )
 
 type CategoryService interface {

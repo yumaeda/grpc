@@ -5,15 +5,16 @@ import (
 	"log"
 	"net"
 
-	"github.com/yumaeda/grpc/internal/infrastructure"
-	"github.com/yumaeda/grpc/internal/repository"
-	"github.com/yumaeda/grpc/internal/server"
-	"github.com/yumaeda/grpc/internal/service"
-	admin_user_pb "github.com/yumaeda/grpc/proto/admin_user"
-	area_pb "github.com/yumaeda/grpc/proto/area"
-	category_pb "github.com/yumaeda/grpc/proto/category"
-	menu_pb "github.com/yumaeda/grpc/proto/menu"
-	photo_pb "github.com/yumaeda/grpc/proto/photo"
+	"github.com/yumaeda/sakabas-grpc/internal/infrastructure"
+	"github.com/yumaeda/sakabas-grpc/internal/repository"
+	"github.com/yumaeda/sakabas-grpc/internal/server"
+	"github.com/yumaeda/sakabas-grpc/internal/service"
+	admin_user_pb "github.com/yumaeda/sakabas-grpc/proto/admin_user"
+	area_pb "github.com/yumaeda/sakabas-grpc/proto/area"
+	category_pb "github.com/yumaeda/sakabas-grpc/proto/category"
+	menu_pb "github.com/yumaeda/sakabas-grpc/proto/menu"
+	photo_pb "github.com/yumaeda/sakabas-grpc/proto/photo"
+	ranking_pb "github.com/yumaeda/sakabas-grpc/proto/ranking"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"gorm.io/gorm"
@@ -72,4 +73,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	categoryService := service.NewCategoryService(categoryRepository)
 	categoryServer := server.NewCategoryServer(categoryService)
 	category_pb.RegisterCategoryServiceServer(grpcServer, categoryServer)
+
+	// Ranking service
+	rankingRepository := repository.NewRankingRepository(db)
+	rankingService := service.NewRankingService(rankingRepository)
+	rankingServer := server.NewRankingServer(rankingService)
+	ranking_pb.RegisterRankingServiceServer(grpcServer, rankingServer)
 }
