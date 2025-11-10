@@ -13,7 +13,7 @@ require (
 )
 
 require (
-	cel.dev/expr v0.19.1 // indirect
+	cel.dev/expr v0.24.0 // indirect // Updated to v0.24.0 for compatibility with github.com/mercari/grpc-federation v1.22.1 as recommended by CodeQL.
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
