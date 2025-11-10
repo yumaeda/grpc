@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package restaurant_genre;
+
+option go_package = "proto/restaurant_genre";
+
+service RestaurantGenreService {
+  rpc GetRestaurantGenre(GetRestaurantGenreRequest) returns (GetRestaurantGenreResponse);
+}
+
+message GetRestaurantGenreRequest {
+  string restaurant_id = 1;
+  int64 genre_id = 2;
+}
+
+message GetRestaurantGenreResponse {
+  RestaurantGenre restaurant_genre = 1;
+}
+
+message RestaurantGenre {
+  string restaurant_id = 1;
+  int64 genre_id = 2;
+}
+

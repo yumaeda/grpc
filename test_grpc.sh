@@ -62,4 +62,10 @@ echo "Request: {\"id\":1}"
 grpcurl -plaintext -d '{"id":1}' localhost:50050 drink.DrinkService/GetDrink
 echo -e "\n"
 
+# Test RestaurantGenre Service
+echo -e "${GREEN}Testing RestaurantGenreService...${NC}"
+echo "Request: {\"restaurant_id\":\"da04f5c9-ffb0-11ea-ba65-065a10bcba76\",\"genre_id\":10}"
+grpcurl -plaintext -d '{"restaurant_id":"da04f5c9-ffb0-11ea-ba65-065a10bcba76","genre_id":10}' localhost:50050 restaurant_genre.RestaurantGenreService/GetRestaurantGenre
+echo -e "\n"
+
 echo -e "${BLUE}=== All tests completed ===${NC}"
