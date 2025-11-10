@@ -18,6 +18,7 @@ import (
 	menu_pb "github.com/yumaeda/sakabas-grpc/proto/menu"
 	photo_pb "github.com/yumaeda/sakabas-grpc/proto/photo"
 	ranking_pb "github.com/yumaeda/sakabas-grpc/proto/ranking"
+	restaurant_genre_pb "github.com/yumaeda/sakabas-grpc/proto/restaurant_genre"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"gorm.io/gorm"
@@ -100,4 +101,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	drinkService := service.NewDrinkService(drinkRepository)
 	drinkServer := server.NewDrinkServer(drinkService)
 	drink_pb.RegisterDrinkServiceServer(grpcServer, drinkServer)
+
+	// RestaurantGenre service
+	restaurantGenreRepository := repository.NewRestaurantGenreRepository(db)
+	restaurantGenreService := service.NewRestaurantGenreService(restaurantGenreRepository)
+	restaurantGenreServer := server.NewRestaurantGenreServer(restaurantGenreService)
+	restaurant_genre_pb.RegisterRestaurantGenreServiceServer(grpcServer, restaurantGenreServer)
 }
