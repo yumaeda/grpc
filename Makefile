@@ -8,6 +8,7 @@ build:
 	proto/area/area.proto \
 	proto/category/category.proto \
 	proto/dish/dish.proto \
+	proto/drink/drink.proto \
 	proto/menu/menu.proto \
 	proto/photo/photo.proto \
 	proto/ranking/ranking.proto \

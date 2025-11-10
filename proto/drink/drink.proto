@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package drink;
+
+option go_package = "proto/drink";
+
+service DrinkService {
+  rpc GetDrink(GetDrinkRequest) returns (GetDrinkResponse);
+}
+
+message GetDrinkRequest {
+  int64 id = 1;
+}
+
+message GetDrinkResponse {
+  Drink drink = 1;
+}
+
+message Drink {
+  int64 id = 1;
+  string name = 2;
+}
+
