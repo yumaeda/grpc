@@ -1,11 +1,12 @@
 syntax = "proto3";
 
-package photo;
+package swapi.photo;
 
-option go_package = "proto/photo";
+option go_package = "github.com/yumaeda/sakabas-grpc/swapi/photo/photo;photopb";
 
 service PhotoService {
   rpc GetPhoto(GetPhotoRequest) returns (GetPhotoResponse);
+  rpc ListPhotos(ListPhotosRequest) returns (ListPhotosResponse);
 }
 
 message GetPhotoRequest {
@@ -14,6 +15,14 @@ message GetPhotoRequest {
 
 message GetPhotoResponse {
   Photo photo = 1;
+}
+
+message ListPhotosRequest {
+  string restaurant_id = 1;
+}
+
+message ListPhotosResponse {
+  repeated Photo photos = 1;
 }
 
 message Photo {

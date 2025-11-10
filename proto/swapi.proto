@@ -4,6 +4,7 @@ import "grpc/federation/federation.proto";
 
 import "restaurant/restaurant.proto";
 import "video/video.proto";
+import "photo/photo.proto";
 
 package swapi;
 
@@ -37,10 +38,18 @@ message GetRestaurantReply {
         request { field: "restaurant_id" by: "$.id" }
       }
     }
+    def {
+      name: "photos"
+      call {
+        method: "swapi.photo.PhotoService/ListPhotos"
+        request { field: "restaurant_id" by: "$.id" }
+      }
+    }
   };
 
   Restaurant restaurant = 1 [(grpc.federation.field).by = "r"];
   repeated Video videos = 2 [(grpc.federation.field).by = "videos.videos"];
+  repeated Photo photos = 3 [(grpc.federation.field).by = "photos.photos"];
 }
 
 message Restaurant {
@@ -65,4 +74,16 @@ message Video {
   string restaurant_id = 2;
   string name = 3;
   string url = 4;
+}
+
+message Photo {
+  option (grpc.federation.message).alias = "swapi.photo.Photo";
+
+  int64 id = 1;
+  string restaurant_id = 2;
+  string name = 3;
+  string image = 4;
+  string image_webp = 5;
+  string thumbnail = 6;
+  string thumbnail_webp = 7;
 }

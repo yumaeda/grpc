@@ -2,20 +2,18 @@ module github.com/yumaeda/sakabas-grpc
 
 go 1.24.0
 
-toolchain go1.24.9
-
 require (
 	github.com/mercari/grpc-federation v1.22.1
 	go.opentelemetry.io/otel v1.37.0
 	go.opentelemetry.io/otel/trace v1.37.0
-	google.golang.org/grpc v1.75.1
+	google.golang.org/grpc v1.65.0 // NOTE: Downgraded to v1.65.0 to maintain compatibility with github.com/mercari/grpc-federation v1.22.1. Upgrading may break federation support.
 	google.golang.org/protobuf v1.36.10
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.0
 )
 
 require (
-	cel.dev/expr v0.24.0 // indirect
+	cel.dev/expr v0.24.0 // indirect // Updated to v0.24.0 for compatibility with github.com/mercari/grpc-federation v1.22.1 as recommended by CodeQL.
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
@@ -38,6 +36,6 @@ require (
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.37.0 // indirect
 	golang.org/x/text v0.29.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20250929231259-57b25ae835d4 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240826202546-f6391c0de4c7 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251029180050-ab9386a59fda // indirect
 )

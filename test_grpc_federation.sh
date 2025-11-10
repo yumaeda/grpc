@@ -20,11 +20,16 @@ echo "Request: {\"id\":1}"
 grpcurl -plaintext -d '{"id":1}' localhost:50052 swapi.video.VideoService/GetVideo
 echo -e "\n"
 
+# Test Photo Service
+echo -e "${GREEN}Testing PhotoService...${NC}"
+echo "Request: {\"id\":100}"
+grpcurl -plaintext -d '{"id":100}' localhost:50053 swapi.photo.PhotoService/GetPhoto
+echo -e "\n"
+
 # Test SWAPI Service
 echo -e "${GREEN}Testing SWAPIService...${NC}"
 echo "Request: {\"id\":\"da04f5c9-ffb0-11ea-ba65-065a10bcba76\"}"
-grpcurl -plaintext -d '{"id":"da04f5c9-ffb0-11ea-ba65-065a10bcba76"}' localhost:50053 swapi.SWAPI/GetRestaurant
+grpcurl -plaintext -d '{"id":"da04f5c9-ffb0-11ea-ba65-065a10bcba76"}' localhost:50054 swapi.SWAPI/GetRestaurant
 echo -e "\n"
 
 echo -e "${BLUE}=== All tests completed ===${NC}"
-
