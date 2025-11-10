@@ -14,12 +14,6 @@ echo "Request: {\"id\":1}"
 grpcurl -plaintext -d '{"id":1}' localhost:50050 area.AreaService/GetArea
 echo -e "\n"
 
-# Test Photo Service
-echo -e "${GREEN}Testing PhotoService...${NC}"
-echo "Request: {\"id\":100}"
-grpcurl -plaintext -d '{"id":100}' localhost:50050 photo.PhotoService/GetPhoto
-echo -e "\n"
-
 # Test Menu Service
 echo -e "${GREEN}Testing MenuService...${NC}"
 echo "Request: {\"id\":\"116e70bb-c26c-4ec7-8935-7f922e8bf551\"}"

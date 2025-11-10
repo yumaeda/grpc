@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 
+	photopb "github.com/yumaeda/sakabas-grpc/swapi/photo/photo"
 	restaurantpb "github.com/yumaeda/sakabas-grpc/swapi/restaurant/restaurant"
 	swapipb "github.com/yumaeda/sakabas-grpc/swapi/swapi"
 	videopb "github.com/yumaeda/sakabas-grpc/swapi/video/video"
@@ -24,6 +25,7 @@ func main() {
 type client struct {
 	restaurantConn *grpc.ClientConn
 	videoConn      *grpc.ClientConn
+	photoConn      *grpc.ClientConn
 }
 
 func (c *client) Close() error {
@@ -34,6 +36,11 @@ func (c *client) Close() error {
 	}
 	if c.videoConn != nil {
 		if err := c.videoConn.Close(); err != nil {
+			return err
+		}
+	}
+	if c.photoConn != nil {
+		if err := c.photoConn.Close(); err != nil {
 			return err
 		}
 	}
@@ -70,8 +77,23 @@ func (c *client) Swapi_Video_VideoServiceClient(_ swapipb.SWAPIClientConfig) (vi
 	return videopb.NewVideoServiceClient(c.videoConn), nil
 }
 
+func (c *client) Swapi_Photo_PhotoServiceClient(_ swapipb.SWAPIClientConfig) (photopb.PhotoServiceClient, error) {
+	if c.photoConn == nil {
+		ep := os.Getenv("PHOTO_SERVICE_ENDPOINT")
+		conn, err := grpc.NewClient(ep,
+			grpc.WithTransportCredentials(insecure.NewCredentials()),
+			grpc.WithDefaultCallOptions(grpc.WaitForReady(true)),
+		)
+		if err != nil {
+			return nil, err
+		}
+		c.photoConn = conn
+	}
+	return photopb.NewPhotoServiceClient(c.photoConn), nil
+}
+
 func run() error {
-	listener, err := net.Listen("tcp", ":50053")
+	listener, err := net.Listen("tcp", ":50054")
 	if err != nil {
 		return err
 	}
@@ -95,7 +117,7 @@ func run() error {
 	swapipb.RegisterSWAPIServer(grpcServer, server)
 	reflection.Register(grpcServer)
 
-	log.Println("gRPC server listening on :50053")
+	log.Println("gRPC server listening on :50054")
 	if err := grpcServer.Serve(listener); err != nil {
 		return err
 	}

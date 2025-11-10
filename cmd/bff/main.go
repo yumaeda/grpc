@@ -16,7 +16,6 @@ import (
 	drink_pb "github.com/yumaeda/sakabas-grpc/proto/drink"
 	genre_pb "github.com/yumaeda/sakabas-grpc/proto/genre"
 	menu_pb "github.com/yumaeda/sakabas-grpc/proto/menu"
-	photo_pb "github.com/yumaeda/sakabas-grpc/proto/photo"
 	ranking_pb "github.com/yumaeda/sakabas-grpc/proto/ranking"
 	restaurant_genre_pb "github.com/yumaeda/sakabas-grpc/proto/restaurant_genre"
 	"google.golang.org/grpc"
@@ -59,12 +58,6 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	menuService := service.NewMenuService(menuRepository)
 	menuServer := server.NewMenuServer(menuService)
 	menu_pb.RegisterMenuServiceServer(grpcServer, menuServer)
-
-	// Photo service
-	photoRepository := repository.NewPhotoRepository(db)
-	photoService := service.NewPhotoService(photoRepository)
-	photoServer := server.NewPhotoServer(photoService)
-	photo_pb.RegisterPhotoServiceServer(grpcServer, photoServer)
 
 	// AdminUser service
 	adminUserRepository := repository.NewAdminUserRepository(db)

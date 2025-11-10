@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/yumaeda/sakabas-grpc/internal/service"
-	pb "github.com/yumaeda/sakabas-grpc/proto/photo"
+	pb "github.com/yumaeda/sakabas-grpc/swapi/photo/photo"
 )
 
 type PhotoServer struct {
@@ -32,5 +32,29 @@ func (s *PhotoServer) GetPhoto(ctx context.Context, req *pb.GetPhotoRequest) (*p
 			Thumbnail:     photo.Thumbnail,
 			ThumbnailWebp: photo.ThumbnailWebp,
 		},
+	}, nil
+}
+
+func (s *PhotoServer) ListPhotos(ctx context.Context, req *pb.ListPhotosRequest) (*pb.ListPhotosResponse, error) {
+	photos, err := s.photoService.ListPhotos(ctx, req.RestaurantId)
+	if err != nil {
+		return nil, err
+	}
+
+	pbPhotos := make([]*pb.Photo, len(photos))
+	for i, photo := range photos {
+		pbPhotos[i] = &pb.Photo{
+			Id:            photo.ID,
+			RestaurantId:  photo.RestaurantID,
+			Name:          photo.Name,
+			Image:         photo.Image,
+			ImageWebp:     photo.ImageWebp,
+			Thumbnail:     photo.Thumbnail,
+			ThumbnailWebp: photo.ThumbnailWebp,
+		}
+	}
+
+	return &pb.ListPhotosResponse{
+		Photos: pbPhotos,
 	}, nil
 }
