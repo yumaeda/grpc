@@ -12,6 +12,7 @@ import (
 	admin_user_pb "github.com/yumaeda/sakabas-grpc/proto/admin_user"
 	area_pb "github.com/yumaeda/sakabas-grpc/proto/area"
 	category_pb "github.com/yumaeda/sakabas-grpc/proto/category"
+	dish_pb "github.com/yumaeda/sakabas-grpc/proto/dish"
 	genre_pb "github.com/yumaeda/sakabas-grpc/proto/genre"
 	menu_pb "github.com/yumaeda/sakabas-grpc/proto/menu"
 	photo_pb "github.com/yumaeda/sakabas-grpc/proto/photo"
@@ -86,4 +87,10 @@ func registerServices(grpcServer *grpc.Server, db *gorm.DB) {
 	genreService := service.NewGenreService(genreRepository)
 	genreServer := server.NewGenreServer(genreService)
 	genre_pb.RegisterGenreServiceServer(grpcServer, genreServer)
+
+	// Dish service
+	dishRepository := repository.NewDishRepository(db)
+	dishService := service.NewDishService(dishRepository)
+	dishServer := server.NewDishServer(dishService)
+	dish_pb.RegisterDishServiceServer(grpcServer, dishServer)
 }
