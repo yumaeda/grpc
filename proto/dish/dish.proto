@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package dish;
+
+option go_package = "proto/dish";
+
+service DishService {
+  rpc GetDish(GetDishRequest) returns (GetDishResponse);
+}
+
+message GetDishRequest {
+  int64 id = 1;
+}
+
+message GetDishResponse {
+  Dish dish = 1;
+}
+
+message Dish {
+  int64 id = 1;
+  string name = 2;
+}
+
