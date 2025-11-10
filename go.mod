@@ -6,7 +6,7 @@ require (
 	github.com/mercari/grpc-federation v1.22.1
 	go.opentelemetry.io/otel v1.37.0
 	go.opentelemetry.io/otel/trace v1.37.0
-	google.golang.org/grpc v1.65.0
+	google.golang.org/grpc v1.65.0 // NOTE: Downgraded to v1.65.0 to maintain compatibility with github.com/mercari/grpc-federation v1.22.1. Upgrading may break federation support.
 	google.golang.org/protobuf v1.36.10
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.0
