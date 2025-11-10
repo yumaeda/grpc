@@ -23,7 +23,7 @@ echo -e "\n"
 # Test Photo Service
 echo -e "${GREEN}Testing PhotoService...${NC}"
 echo "Request: {\"id\":100}"
-grpcurl -plaintext -d '{"id":100}' localhost:50053 photo.PhotoService/GetPhoto
+grpcurl -plaintext -d '{"id":100}' localhost:50053 swapi.photo.PhotoService/GetPhoto
 echo -e "\n"
 
 # Test SWAPI Service
